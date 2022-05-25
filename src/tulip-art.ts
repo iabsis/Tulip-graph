@@ -75,8 +75,7 @@ import { log } from '@graphprotocol/graph-ts'
 
 
 export function handleTransfer(event: Transfer): void {
-
-  
+  log.error("handleTransfer EVENT is: {}", [event.transaction.value.toString()]);
 }
 
 /**
@@ -92,5 +91,5 @@ export function handlePrizePoolAwarded(event: PrizePoolAwarded): void {
   //   entity = new TulipEntity(event.transaction.from.toHex())
   // }
   
-  log.warning("EVENT is: {}", [event.transaction.value.toString()]);
+  log.error("handlePrizePoolAwarded EVENT is: {}", [event.transaction.value.toString()]);
 }
