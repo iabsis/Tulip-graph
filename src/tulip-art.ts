@@ -92,5 +92,5 @@ export function handlePrizePoolAwarded(event: PrizePoolAwarded): void {
   //   entity = new TulipEntity(event.transaction.from.toHex())
   // }
   
-  log.debug("EVENT is: {}", [event.transaction.value.toString()]);
+  log.warning("EVENT is: {}", [event.transaction.value.toString()]);
 }
