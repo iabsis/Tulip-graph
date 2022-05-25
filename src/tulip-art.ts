@@ -7,6 +7,7 @@ import {
 import { PrizePoolAwarded } from "../generated/TulipArtLottery/TulipArtLottery"
 import { TulipEntity } from "../generated/schema"
 import { log } from '@graphprotocol/graph-ts'
+import { ethereum } from "@graphprotocol/graph-ts/chain/ethereum"
 
 // export function handleApproval(event: Approval): void {
 //   // Entities can be loaded from the store using a string ID; this ID
@@ -84,19 +85,22 @@ export function handleTransfer(event: Transfer): void {
  * @param event 
  */
 export function handlePrizePoolAwarded(event: PrizePoolAwarded): void {
-  // Check if exists
-  // let entity = TulipEntity.load(event.transaction.from.toHex())
 
-  // if (!entity) {
-  //   entity = new TulipEntity(event.transaction.from.toHex())
-  // }
-  if (event.receipt?.logs) {
-    event.receipt.logs[0].data.toString()
-    for (const logId in event.receipt.logs) {
-      const data = event.receipt.logs[logId];
-      const topics = data.topics.toString();
-      const rowData = data.data.toString();
-      log.error("handlePrizePoolAwarded EVENT is: {}, {}", [topics, rowData]);
+  const receipt = event.receipt;
+  if (receipt) {
+    const logs = receipt.logs;
+    if (logs.length) {
+
+       for (let logId: number=0; logId < logs.length; logId++) {
+        const data = logs[<i32>logId];
+
+        if (data) {
+          const topics = data.topics.toString();
+          const rowData = data.data.toString();
+          log.error("handlePrizePoolAwarded EVENT is: {}, {}", [topics, rowData]);
+        }
+      }
     }
+   
   }
 }
