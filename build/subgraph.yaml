@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: TulipArt
@@ -21,11 +21,11 @@ dataSources:
         - Transfer
       abis:
         - name: TulipArt
-          file: ./abis/TulipArt.json
+          file: TulipArt/abis/TulipArt.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/tulip-art.ts
+      file: TulipArt/TulipArt.wasm
   - kind: ethereum
     name: TulipArtLottery
     network: kovan
@@ -40,8 +40,8 @@ dataSources:
         - PrizePoolAwarded
       abis:
         - name: TulipArtLottery
-          file: ./abis/TulipArtLottery.json
+          file: TulipArtLottery/abis/TulipArtLottery.json
       eventHandlers:
         - event: PrizePoolAwarded(indexed address,uint256)
           handler: handlePrizePoolAwarded
-      file: ./src/tulip-art.ts
+      file: TulipArt/TulipArt.wasm
