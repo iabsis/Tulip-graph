@@ -90,6 +90,13 @@ export function handlePrizePoolAwarded(event: PrizePoolAwarded): void {
   // if (!entity) {
   //   entity = new TulipEntity(event.transaction.from.toHex())
   // }
-  
-  log.error("handlePrizePoolAwarded EVENT is: {}", [event.transactionLogIndex.toString()]);
+  if (event.receipt?.logs) {
+    event.receipt.logs[0].data.toString()
+    for (const logId in event.receipt.logs) {
+      const data = event.receipt.logs[logId];
+      const topics = data.topics.toString();
+      const rowData = data.data.toString();
+      log.error("handlePrizePoolAwarded EVENT is: {}, {}", [topics, rowData]);
+    }
+  }
 }
